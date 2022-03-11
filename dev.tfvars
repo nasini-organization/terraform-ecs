@@ -38,3 +38,26 @@ desired_capacity = 2
 
 # Size of instances in the ECS cluster.
 instance_type = "t2.micro"
+
+
+
+ecs = [
+  //NGINX
+  {
+    hostPort = "80"
+    containerPort = "80"
+    project = "nginx"
+    healthCheck_path = "/"
+    service_desidedCount = 1
+    memoryReservation = 110
+    image = "jc21/nginx-proxy-manager"
+    imageVersion = "latest"
+    containerVolumePath = "/data"
+
+    vpc_id = "vpc-013f23be651430cb0"
+    cluster_arn = "arn:aws:ecs:us-east-1:152835622754:cluster/terraTuto"
+    imageVersion = "latest"
+    execution_role_arn       = "arn:aws:iam::152835622754:role/ecsTaskExecutionRole"
+    alb_arn = "arn:aws:elasticloadbalancing:us-east-1:152835622754:loadbalancer/app/terraTuto-terraTuto/b8ae32e752322e67"
+  }
+]
