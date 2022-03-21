@@ -252,3 +252,50 @@ Kubernetes and Mesos act like a big cluster where they encourage you to deploy a
 ### ECS detect deployments failure
 
 When deploying manually we can see if the new container has started or is stuck in a start/stop loop. But when deploying automatically this is not visible. To make sure we get alerted when containers start failing we need to watch for events from ECS who state that a container has STOPPED. This can be done by using the module [ecs_events](modules/ecs_events/main.tf). The only thing that is missing from the module is the actual alert. This is because terraform can't handle email and all other protocols for *aws_sns_topic_subscription* are specific per customer.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_ecs"></a> [ecs](#module\_ecs) | ./modules/ecs | n/a |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_key_pair.ecs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | The AWS availability zones to create subnets in. | `list` | n/a | yes |
+| <a name="input_aws_ecs_ami"></a> [aws\_ecs\_ami](#input\_aws\_ecs\_ami) | The AMI to seed ECS instances with. | `any` | n/a | yes |
+| <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | The AWS-CLI profile for the account to create resources in. | `any` | n/a | yes |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to create resources in. | `any` | n/a | yes |
+| <a name="input_desired_capacity"></a> [desired\_capacity](#input\_desired\_capacity) | Ideal number of instances in the ECS cluster. | `any` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | A name to describe the environment we're creating. | `any` | n/a | yes |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Size of instances in the ECS cluster. | `any` | n/a | yes |
+| <a name="input_max_size"></a> [max\_size](#input\_max\_size) | Maximum number of instances in the ECS cluster. | `any` | n/a | yes |
+| <a name="input_min_size"></a> [min\_size](#input\_min\_size) | Minimum number of instances in the ECS cluster. | `any` | n/a | yes |
+| <a name="input_private_subnet_cidrs"></a> [private\_subnet\_cidrs](#input\_private\_subnet\_cidrs) | The IP ranges to use for the private subnets in your VPC. | `list` | n/a | yes |
+| <a name="input_public_subnet_cidrs"></a> [public\_subnet\_cidrs](#input\_public\_subnet\_cidrs) | The IP ranges to use for the public subnets in your VPC. | `list` | n/a | yes |
+| <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | The IP range to attribute to the virtual network. | `any` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_default_alb_target_group"></a> [default\_alb\_target\_group](#output\_default\_alb\_target\_group) | n/a |
+<!-- END_TF_DOCS -->
